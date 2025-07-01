@@ -299,12 +299,6 @@
   border-right: 1px solid #ccc; /* Viền phải cho ô cuối cùng */
 }
 
-/* Cải thiện hiệu ứng hover */
-[data-tab-content="dieukhien"] .info-table td:hover {
-  background-color: #f1f1f1;
-}
-
-
 
 
     /* Căn chỉnh bảng trong tab Cấu hình */
@@ -748,12 +742,18 @@
             statusTextEl.classList.add("running");
             statusIndicator.classList.add("icon-indicator");
             statusIndicator.textContent = "🔥";
+
+            // Vô hiệu hóa dropdown khi đang chạy
+            stepSelect.disabled = true;
           } else {
             statusTextEl.textContent = "ĐANG DỪNG";
             statusTextEl.classList.remove("running");
             statusTextEl.classList.add("stopped");
             statusIndicator.classList.remove("icon-indicator");
             statusIndicator.textContent = "🔴";
+
+            // Kích hoạt lại dropdown khi dừng
+            stepSelect.disabled = false;
           }
         }
 
@@ -806,6 +806,13 @@
             // Định dạng lại thời gian tổng đã chạy từ "00:00" thành "giờ:phút"
             const formattedTotalElapsed = formatTime(totalElapsed);
             document.getElementById("totalElapsed").innerText = formattedTotalElapsed || "...";
+
+
+            // In ra console các giá trị
+          // console.log("Thời gian bước: " + (timeMin ? `${timeMin} phút` : "..."));
+          // console.log("Thời gian đã chạy: " + (stepElapsed ? `${stepElapsed} phút` : "..."));
+          // console.log("Thời gian tổng dự kiến: " + (formattedTotalExpect || "..."));
+          // console.log("Thời gian tổng đã chạy: " + (formattedTotalElapsed || "..."));
           }
         }
 
